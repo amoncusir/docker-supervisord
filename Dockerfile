@@ -19,32 +19,25 @@ LABEL info.digitalpoet.docker-supervisord.maintainer="Aran Moncusi Ramirez <aran
 
 ENV SUPERVISOR_VERSION 3.3.1
 ENV PYTHON_DOCKER_VERSION 4.1.0
-#ENV DOCKERIZE_VERSION v0.6.1
 
 # Supervisord env variables
-ENV LOGLEVEL = warn
-ENV SD_LOG_MAX_SYZE = 10MB
-ENV SD_LOG_BKP = 10
+ENV LOGLEVEL warn
+ENV SD_LOG_MAX_SYZE 10MB
+ENV SD_LOG_BKP 10
 
 # Install Dependencies =================================================================================================
 
 # Install python and supervisord
 RUN apk add --no-cache py-pip \
     && pip install docker==$PYTHON_DOCKER_VERSION \
-    && pip install supervisor==$SUPERVISOR_VERSION
-
-#    wget -q0- https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz | tar xzvf - -C /usr/local/bin &&\
-
-#    tar -C /usr/local/bin -xzvf dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz &&\
-#    rm dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+    && pip install supervisor==$SUPERVISOR_VERSION \
+    && wget https://github.com/amoncusir/kill_supervisord/releases/download/1.0/kill_superd.py -O /usr/local/bin/kill_superd.py
+    && mkdir -p /var/log/supervisord
 
 # Add Configuration Files ==============================================================================================
 
 # Default configuration
 COPY ./supervisord.conf /etc/supervisord.conf
-
-# Add binaries and utilities
-COPY ./kill_superd.py /usr/local/bin/kill_superd.py
 
 # Add Entrypoint =======================================================================================================
 
