@@ -3,7 +3,7 @@
 Extended image from Alpine image ([See in Github](https://github.com/alpinelinux/docker-alpine)) with
 [Supervisord](http://supervisord.org/) as entrypoint.
 
-This build, delegate to Docker the live-cycle of your applications using the event listener 
+This build delegates to Docker the live-cycle of your applications using the event listener 
 [Kill Supervisord](https://github.com/amoncusir/kill_supervisord).
 
 > NOTE: Supervisord run as PID 1
@@ -16,8 +16,8 @@ In your Dockerfile: `FROM digitalpoet/supervisord`
 To add new configurations of Supervisord, only need copy files to folder: `/etc/supervisord/conf.d/`.
 The include rule in main config file is: `/etc/supervisord/conf.d/*.conf`.
 
-This image build, use the event listener `kill_supervisord`
-([See Github Repo](https://github.com/amoncusir/kill_supervisord)) with the default data. If you want add custom
+This image build use the event listener `kill_supervisord`
+([See Github Repo](https://github.com/amoncusir/kill_supervisord)) with the default arguments. If you want add custom
 arguments, you need to add `ENV` variable named `KILL_SUPERD_ARGS` in your dockerfile or in the os env system.
 
 ## Custom Overridable Arguments
