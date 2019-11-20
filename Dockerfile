@@ -25,6 +25,7 @@ ENV KILL_SUPERD_VERSION 1.0
 ENV LOGLEVEL warn
 ENV SD_LOG_MAX_SYZE 10MB
 ENV SD_LOG_BKP 10
+ENV KILL_SUPERD_ARGS=""
 
 # Install Dependencies =================================================================================================
 
