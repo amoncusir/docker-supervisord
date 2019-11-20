@@ -19,6 +19,7 @@ LABEL info.digitalpoet.docker-supervisord.maintainer="Aran Moncusi Ramirez <aran
 
 ENV SUPERVISOR_VERSION 3.3.1
 ENV PYTHON_DOCKER_VERSION 4.1.0
+ENV KILL_SUPERD_VERSION 1.0
 
 # Supervisord env variables
 ENV LOGLEVEL warn
@@ -27,11 +28,12 @@ ENV SD_LOG_BKP 10
 
 # Install Dependencies =================================================================================================
 
-# Install python and supervisord
+# Install dependencies
 RUN apk add --no-cache py-pip \
     && pip install docker==$PYTHON_DOCKER_VERSION \
     && pip install supervisor==$SUPERVISOR_VERSION \
-    && wget https://github.com/amoncusir/kill_supervisord/releases/download/1.0/kill_superd.py -O /usr/local/bin/kill_superd.py
+    && wget https://github.com/amoncusir/kill_supervisord/releases/download/$KILL_SUPERD_VERSION/kill_superd.py -O /usr/local/bin/kill_superd.py \
+    && chmod +x /usr/local/bin/* \
     && mkdir -p /var/log/supervisord
 
 # Add Configuration Files ==============================================================================================
